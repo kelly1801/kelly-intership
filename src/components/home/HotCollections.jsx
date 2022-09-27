@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import OwlCarousel from "react-owl-carousel";
@@ -7,9 +7,6 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 import Skeleton from "../UI/Skeleton";
 
 const HotCollections = () => {
-  
-
-
   const options = {
     loop: true,
     margin: 10,
@@ -40,9 +37,13 @@ const HotCollections = () => {
     setHotCollection(hotCollectionsData.data);
   }
  
-  
+  useEffect(()=>{
+
     getHotCollectionData();
     
+  },[])
+  
+   
  
   return (
     <section id="section-collections" className="no-bottom">
