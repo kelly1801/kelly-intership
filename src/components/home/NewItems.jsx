@@ -57,7 +57,7 @@ const NewItems = () => {
             </div>
           </div>
 
-          {newItems ? (
+          {newItems.length ? (
             <OwlCarousel className="owl-theme" {...options}>
               {newItems.map((item, index) => (
                 <div className="nft__item" key={index}>
