@@ -1,38 +1,38 @@
 import React, { useState, useEffect } from "react";
 
 function Counter({ expDate }) {
-  let initialTime;
-  const countDown = expDate;
-  const [time, setTime] = useState({
-    millis: 1,
-    seconds: 1,
-    minutes: 1,
-    hours: 1,
-  });
+  const [time, setTime] = useState("");
+  const [interval, setIntervalRefresh] = useState();
 
-  function counterTime() {
-    initialTime = Date.now();
+  useEffect(() => {
+    countDown()
+
+    const refresh = setInterval(() => {
+      countDown()
+    }, 1000);
+
+    setIntervalRefresh(refresh);
+
+    return () => {
+      clearInterval(refresh);
+    }
+  }, []);
+
+  function countDown() {
+    const millis = expDate - Date.now();
+
+   const seconds = millis / 1000;
+    const minutes = seconds / 60;
+    const hours = minutes / 60;
 
     setTime(
-      {millis : Math.floor(countDown - initialTime),
-      seconds : time.millis / 1000,
-      minutes : Math.floor(time.seconds / 60),
-      hours : Math.floor(time.minutes / 24)}
+      `${Math.floor(hours)}h ${Math.floor(minutes % 60)}m ${Math.floor(
+        seconds % 60
+      )}s`
     );
-  
   }
 
-  useEffect(()=>{
-counterTime()
-  }, [time.seconds])
-
-  
-
-  return (
-    <div className="de_countdown">{`${time.hours}h ${
-      time.minutes % 60
-    }m ${Math.floor(time.seconds % 60)}s`}</div>
-  );
-}
+  return <div className="de_countdown">{time}</div>;
+};
 
 export default Counter;

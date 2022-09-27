@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import OwlCarousel from "react-owl-carousel";
@@ -38,8 +38,10 @@ const NewItems = () => {
     setNewItems(newItemsData.data);
   }
 
- 
+  useEffect(() => {
     getNewItemsData();
+  }, []);
+    
   
     
 
@@ -54,13 +56,14 @@ const NewItems = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          {newItems.length ? (
+
+          {newItems ? (
             <OwlCarousel className="owl-theme" {...options}>
               {newItems.map((item, index) => (
                 <div className="nft__item" key={index}>
                   <div className="author_list_pp">
                     <Link
-                      to={`/author/${item.nftId}`}
+                      to={`/author/${item.authorId}`}
                       data-bs-toggle="tooltip"
                       data-bs-placement="top"
                       title="Creator: Monica Lucas"
@@ -98,7 +101,7 @@ const NewItems = () => {
                       </div>
                     </div>
 
-                    <Link to="/item-details">
+                    <Link to={`/item-details/${item.nftId}`}>
                       <img
                         src={item.nftImage}
                         className="lazy nft__item_preview"
@@ -137,7 +140,8 @@ const NewItems = () => {
                       <i className="fa fa-check"></i>
                     </Link>
                   </div>
-                  <div className="de_countdown">5h 30m 32s</div>
+                  <div className="de_countdown"><Skeleton width={50} height={20} borderRadius={15}
+                    /></div>
 
                   <div className="nft__item_wrap">
                     <div className="nft__item_extra">
