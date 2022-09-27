@@ -40,7 +40,7 @@ const NewItems = () => {
 
   useEffect(() => {
     getNewItemsData();
-  }, []);
+}, []);
     
   
     
@@ -140,7 +140,7 @@ const NewItems = () => {
                       <i className="fa fa-check"></i>
                     </Link>
                   </div>
-                  <div className="de_countdown"><Skeleton width={50} height={20} borderRadius={15}
+                  <div className="de_countdown"><Skeleton width={50} height={20} borderRadius={10}
                     /></div>
 
                   <div className="nft__item_wrap">
