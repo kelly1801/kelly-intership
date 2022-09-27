@@ -12,7 +12,7 @@ const TopSellers = () => {
       `https://us-central1-nft-cloud-functions.cloudfunctions.net/topSellers`
     );
     setTopSellers(topSellersData.data);
-    console.log(topSellers)
+    
   }
 
   useEffect(() => {
