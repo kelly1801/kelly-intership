@@ -9,12 +9,7 @@ import Counter from "./Counter";
 
 const NewItems = () => {
 
-  const [newItems, setNewItems] = useState([]);
-
-  useEffect(() => {
-    getNewItemsData();
-
-}, [newItems]);
+ 
  
   const options = {
     loop: true,
@@ -38,7 +33,9 @@ const NewItems = () => {
   };
 
 
+  const [newItems, setNewItems] = useState([]);
 
+ 
   async function getNewItemsData() {
     const newItemsData = await axios.get(
       `https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems`
@@ -48,11 +45,16 @@ const NewItems = () => {
     
   }
 
+  useEffect(() => {
+    getNewItemsData();
+
+}, []);
+
+
 
 
     
 
-console.log(newItems.length) 
   return (
     <section id="section-items" className="no-bottom">
       <div className="container">
@@ -69,7 +71,8 @@ console.log(newItems.length)
             <OwlCarousel className="owl-theme" {...options}>
               
               {newItems.map((item, index) => (
-                <div className="nft__item" key={index}>
+            <>
+            <div className="nft__item" key={index}>
                   <div className="author_list_pp">
                     <Link
                       to={`/author/${item.authorId}`}
@@ -129,10 +132,13 @@ console.log(newItems.length)
                     </div>
                   </div>
                 </div>
+                </>
               ))}
+           
             </OwlCarousel>
-            
+           
               ) : (
+                <>
             <OwlCarousel className="owl-theme" {...options}>
               {new Array(7).fill(0).map((_, index) => (
                 <div className="nft__item" key={index}>
@@ -149,7 +155,7 @@ console.log(newItems.length)
                       <i className="fa fa-check"></i>
                     </Link>
                   </div>
-                  <div className="de_countdown"><Skeleton width={50} height={20} borderRadius={10}
+                  <div className="de_countdown"><Skeleton width="100%" height="100%" borderRadius={10}
                     /></div>
 
                   <div className="nft__item_wrap">
@@ -195,6 +201,7 @@ console.log(newItems.length)
                 </div>
               ))}
             </OwlCarousel>
+            </>
           )} 
         </div>
       </div>
