@@ -16,11 +16,14 @@ const ItemDetails = () => {
     );
     setNft(nftData.data);
   }
-
+console.log(nft.length)
   useEffect(() => {
     window.scrollTo(0, 0);
+   
     getNftData();
     setLoading(false)
+ 
+    
   }, []);
 
   return (
@@ -29,7 +32,7 @@ const ItemDetails = () => {
         <div id="top"></div>
         <section aria-label="section" className="mt90 sm-mt-0">
           <div className="container">
-            {loading?   (
+            {loading ?   (
               <>
               <div className="row">
                 <div className="col-md-6 text-center">
