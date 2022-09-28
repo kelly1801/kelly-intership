@@ -8,6 +8,14 @@ import Skeleton from "../UI/Skeleton";
 import Counter from "./Counter";
 
 const NewItems = () => {
+
+  const [newItems, setNewItems] = useState([]);
+
+  useEffect(() => {
+    getNewItemsData();
+
+}, [newItems]);
+ 
   const options = {
     loop: true,
     margin: 10,
@@ -29,23 +37,22 @@ const NewItems = () => {
     },
   };
 
-  const [newItems, setNewItems] = useState([]);
+
 
   async function getNewItemsData() {
     const newItemsData = await axios.get(
       `https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems`
     );
-    setNewItems(newItemsData.data);
+   setNewItems(newItemsData.data);
+    
+    
   }
 
-  useEffect(() => {
-    getNewItemsData();
-}, []);
-    
-  
-    
 
 
+    
+
+console.log(newItems.length) 
   return (
     <section id="section-items" className="no-bottom">
       <div className="container">
@@ -58,7 +65,9 @@ const NewItems = () => {
           </div>
 
           {newItems.length ? (
+            
             <OwlCarousel className="owl-theme" {...options}>
+              
               {newItems.map((item, index) => (
                 <div className="nft__item" key={index}>
                   <div className="author_list_pp">
@@ -72,7 +81,7 @@ const NewItems = () => {
                       <i className="fa fa-check"></i>
                     </Link>
                   </div>
-                 {item.expiryDate && <Counter expDate={item.expiryDate}/>}
+                {item.expiryDate && <Counter expDate={item.expiryDate}/>}
               
                   <div className="nft__item_wrap">
                     <div className="nft__item_extra">
@@ -123,7 +132,7 @@ const NewItems = () => {
               ))}
             </OwlCarousel>
             
-         ) : (
+              ) : (
             <OwlCarousel className="owl-theme" {...options}>
               {new Array(7).fill(0).map((_, index) => (
                 <div className="nft__item" key={index}>
