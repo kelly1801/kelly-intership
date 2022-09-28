@@ -11,6 +11,7 @@ const Landing = () => {
       className="no-top no-bottom vh-100"
       data-bgimage="url(images/bg-shape-1.jpg) bottom"
       style={{ background: `url(${backgroundImage}) bottom / cover` }}
+      data-aos="fade-up"
     >
       <div className="v-center">
         <div className="container">
